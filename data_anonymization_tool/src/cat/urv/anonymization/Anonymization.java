@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import cat.urv.exception.InvalidConfidentialAttributeException;
@@ -51,6 +52,10 @@ public class Anonymization {
 			throw new QuasiNotFoundException();
 		}
 		
+	}
+
+	public void checkAnom(){
+		System.out.println(dataAnom);
 	}
 	
 	/**
@@ -111,6 +116,7 @@ public class Anonymization {
 			bw.write(s);
 			bw.newLine();
 
+//			System.out.println(Arrays.deepToString(dataAnom));
 			for(String[] rec:dataAnom){
 				s = "";
 				for(String attr:rec){
@@ -196,12 +202,18 @@ public class Anonymization {
 					if(Record.getListDataTypes().get(i).equalsIgnoreCase(Constants.date)){
 						values[j] = String.valueOf(Distances.getLongFromStringDate(dataAnom[j][i]));
 					}
-					else{
+
+
+					else if (!Record.getListAttrTypes().get(i).equalsIgnoreCase(Constants.identifier)){
+
 						values[j] = dataAnom[j][i];
 					}
 				}
-				anonymizedMean[i] = Statistics.calculateMean(values);
-				anonymizedVariance[i] = Statistics.calculateVariance(values, anonymizedMean[i]);
+				if (!Record.getListAttrTypes().get(i).equalsIgnoreCase(Constants.identifier)) {
+					anonymizedMean[i] = Statistics.calculateMean(values);
+					anonymizedVariance[i] = Statistics.calculateVariance(values, anonymizedMean[i]);
+				}
+
 			}
 		}
 		
@@ -304,10 +316,10 @@ public class Anonymization {
 		for(int i=0; i<dataQuasis.size(); i++){	//anonymize original data
 			recordQ = dataQuasis.get(i);
 			record = dataOri.get(i).clone();
+
 			dataAnom.add(recordQ.toRecord(record));
 		}
 		System.out.println("done");
-		
 		return dataAnom;
 	}
 	

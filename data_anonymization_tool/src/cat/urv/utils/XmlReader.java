@@ -320,6 +320,7 @@ public class XmlReader {
 		for(String aType:attrTypes){
         	if(!aType.equalsIgnoreCase(Constants.categoric) &&
         	   !aType.equalsIgnoreCase(Constants.numericDiscrete) &&
+					!aType.equalsIgnoreCase(Constants.numericContinuous) &&
         	   !aType.equalsIgnoreCase(Constants.categoricOrdinal) &&
         	   !aType.equalsIgnoreCase(Constants.date) &&
         	   !aType.equalsIgnoreCase(Constants.semantic)){

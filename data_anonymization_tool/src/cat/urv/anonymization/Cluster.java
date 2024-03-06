@@ -58,7 +58,10 @@ public class Cluster {
      * @return a record that is the centroid of this cluster of records
      */
 	public void calculateCentroid() throws InvalidValueException{
-		long mean;
+
+		double mean;
+
+
 		String mode;
 		String dataType, attrType;
 		String semanticCentroid;
@@ -78,6 +81,7 @@ public class Cluster {
 					if(dataType.equalsIgnoreCase(Constants.numericContinuous)){
 						mean = calculateMeanDouble(i);
 						centroid.attrValues[i] = String.valueOf(mean);
+
 					}
 					else{
 //						mode = calculateMode(i);
@@ -114,7 +118,7 @@ public class Cluster {
 		return mean;
 	}
 	
-	private long calculateMeanDouble(int attr) throws InvalidValueException{
+	private double calculateMeanDouble(int attr) throws InvalidValueException{
 		double mean;
 		String value = null;
 		
@@ -122,14 +126,14 @@ public class Cluster {
 			mean = 0;
 			for(RecordQ reg:elements){
 				value = reg.attrValues[attr];
-				mean += Long.parseLong(value);
+				mean += Double.parseDouble(value);
 			}
 			mean /= elements.size();
 		} catch (NumberFormatException e) {
 			throw new InvalidValueException(value);
 		}
 		
-		return (long)mean;
+		return mean;
 	}
 	
 	private String calculateMode(int attr){

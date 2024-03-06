@@ -47,9 +47,9 @@ public class Main {
 			//Save the anonymized dataset
 			anonymization.saveAnonymizedDataset(getNameAnonymizedDataset(datasetLocation));
 			//Calculate information loss metrics
-			informationLossResult = anonymization.calculateInformationLoss();
+//			informationLossResult = anonymization.calculateInformationLoss();
 			//Structured print of error (SSE), attribute variances and means
-			System.out.println(informationLossResult);
+//			System.out.println(informationLossResult);
 		} catch (DatasetNotFoundException e) {
 			System.out.println("Error: Dataset not found or wrong");
 			printUsage();
