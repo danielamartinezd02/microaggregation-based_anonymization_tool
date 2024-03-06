@@ -43,6 +43,7 @@ public class Statistics {
 			mean += value;
 		}
 		mean /= values.length;
+
 		return mean;
 	}
 
